@@ -5,8 +5,11 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -18,11 +21,32 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import static in.firebird.hyperkocal.Splash.list;
+
 public class MainActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
     private StatesAdapter adapter;
     private List<StatesHandler> statesHandlerList;
+
+    private View.OnClickListener onItemClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            //TODO: Step 4 of 4: Finally call getTag() on the view.
+            // This viewHolder will have all required values.
+            RecyclerView.ViewHolder viewHolder = (RecyclerView.ViewHolder) view.getTag();
+            int position = viewHolder.getAdapterPosition();
+            // viewHolder.getItemId();
+            // viewHolder.getItemViewType();
+            // viewHolder.itemView;
+
+            Toast.makeText(MainActivity.this, "You Clicked: " +viewHolder.getLayoutPosition() , Toast.LENGTH_SHORT).show();
+
+            Intent myIntent = new Intent(getApplicationContext(), CitiesView.class);
+            myIntent.putExtra("intVariableName", viewHolder.getLayoutPosition());
+            startActivity(myIntent);
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,36 +63,22 @@ public class MainActivity extends AppCompatActivity {
         //recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
-
+        adapter.setItemClickListener(onItemClickListener);
         prepareStates();
-
-        // Write a message to the database
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("States");
-
-        //myRef.setValue("Hello, World!");
-
-        // Read from the database
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                HashMap value = (HashMap) dataSnapshot.getValue();
-                Log.d("Neel", "Value is: " + value);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                Log.w("Neel", "Failed to read value.", error.toException());
-            }
-        });
     }
 
     private void prepareStates() {
-        StatesHandler a = new StatesHandler("Jharkhand", "https://img.etimg.com/thumb/msid-73464087,width-300,imgsize-288631,resizemode-4/jagannath-temple-ani.jpg");
-        statesHandlerList.add(a);
+
+        StatesHandler a;
+
+        int numberOfStates = list.size();
+        for (int i = 0; i<numberOfStates; i++)
+        {
+            HashMap stateDetails = (HashMap) list.get(i);
+            a = new StatesHandler((String) stateDetails.get("name"), (String) stateDetails.get("thumbnail"));
+            statesHandlerList.add(a);
+        }
+
         adapter.notifyDataSetChanged();
     }
 }

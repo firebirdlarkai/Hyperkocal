@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -28,6 +29,7 @@ public class CitiesView extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cities_view);
 
+        Log.d("Neel", "onCreate: Inside City view");
         recyclerView = (RecyclerView) findViewById(R.id.myRecyclerViewCities);
 
         cityList = new ArrayList<>();
@@ -46,7 +48,10 @@ public class CitiesView extends AppCompatActivity {
 
         City a;
 
-        HashMap cityMap = (HashMap) list.get(0);
+        Intent mIntent = getIntent();
+        int intValue = mIntent.getIntExtra("intVariableName", 0);
+
+        HashMap cityMap = (HashMap) list.get(intValue);
 
         ArrayList cityArray = (ArrayList) cityMap.get("cities");
 
@@ -57,6 +62,15 @@ public class CitiesView extends AppCompatActivity {
             a = new City((String) cityDetails.get("name"), (String) cityDetails.get("thumbnail"));
             cityList.add(a);
         }
+
+
+        /*int numberOfCities = cityArray.size();
+        for (int i = 0; i<numberOfCities; i++)
+        {
+            HashMap cityDetails = (HashMap) cityArray.get(i);
+            a = new City((String) cityDetails.get("name"), (String) cityDetails.get("thumbnail"));
+            cityList.add(a);
+        }*/
 
         adapter.notifyDataSetChanged();
     }

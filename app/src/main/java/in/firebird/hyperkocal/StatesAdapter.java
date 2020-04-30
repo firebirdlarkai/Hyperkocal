@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,8 +17,13 @@ import java.util.List;
 
 public class StatesAdapter extends RecyclerView.Adapter<StatesAdapter.MyViewHolder> {
 
+    private View.OnClickListener onItemClickListener;
     private Context mContext;
     private List<StatesHandler> statesHandlerList;
+
+    public void setItemClickListener(View.OnClickListener clickListener) {
+        onItemClickListener = clickListener;
+    }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView name;
@@ -27,6 +33,8 @@ public class StatesAdapter extends RecyclerView.Adapter<StatesAdapter.MyViewHold
             super(view);
             name = (TextView) view.findViewById(R.id.stateName);
             thumbnail = (ImageView) view.findViewById(R.id.stateImageView);
+            view.setTag(this);
+
         }
     }
     public StatesAdapter(Context mContext, List<StatesHandler> statelist) {
@@ -34,15 +42,17 @@ public class StatesAdapter extends RecyclerView.Adapter<StatesAdapter.MyViewHold
         this.statesHandlerList = statelist;
     }
 
-
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext())
+        final View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.statecardview, parent, false);
 
+        itemView.setOnClickListener(onItemClickListener);
         return new MyViewHolder(itemView);
     }
+
+
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
@@ -56,5 +66,6 @@ public class StatesAdapter extends RecyclerView.Adapter<StatesAdapter.MyViewHold
     public int getItemCount() {
         return statesHandlerList.size();
     }
+
 
 }

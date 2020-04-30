@@ -1,13 +1,14 @@
 package in.firebird.hyperkocal;
 
-public class StatesHandler {
+public class City {
+
     private String name;
     private String thumbnail;
 
-    public StatesHandler() {
+    public City() {
     }
 
-    public StatesHandler(String name, String thumbnail) {
+    public City(String name, String thumbnail) {
         this.name = name;
         this.thumbnail = thumbnail;
     }
