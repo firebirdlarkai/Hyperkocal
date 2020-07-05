@@ -1,2 +1,3 @@
+include ':hyperlocaladmin'
 rootProject.name='Hyperkocal'
 include ':app'

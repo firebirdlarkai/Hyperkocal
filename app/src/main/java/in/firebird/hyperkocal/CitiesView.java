@@ -59,19 +59,10 @@ public class CitiesView extends AppCompatActivity {
         for (int i = 0; i<numberOfCities; i++)
         {
             HashMap cityDetails = (HashMap) cityArray.get(i);
-            a = new City((String) cityDetails.get("name"), (String) cityDetails.get("thumbnail"));
+            a = new City((String) cityDetails.get("name"), (String) cityDetails.get("thumbnail")
+                    , (ArrayList) cityDetails.get("services"));
             cityList.add(a);
         }
-
-
-        /*int numberOfCities = cityArray.size();
-        for (int i = 0; i<numberOfCities; i++)
-        {
-            HashMap cityDetails = (HashMap) cityArray.get(i);
-            a = new City((String) cityDetails.get("name"), (String) cityDetails.get("thumbnail"));
-            cityList.add(a);
-        }*/
-
         adapter.notifyDataSetChanged();
     }
 }

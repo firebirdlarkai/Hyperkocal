@@ -1,16 +1,17 @@
 package in.firebird.hyperkocal;
 
+import java.util.ArrayList;
+
 public class City {
 
     private String name;
     private String thumbnail;
+    private ArrayList service;
 
-    public City() {
-    }
-
-    public City(String name, String thumbnail) {
+    public City(String name, String thumbnail, ArrayList service) {
         this.name = name;
         this.thumbnail = thumbnail;
+        this.service = service;
     }
 
     public String getName() {
@@ -27,5 +28,13 @@ public class City {
 
     public void setThumbnail(String thumbnail) {
         this.thumbnail = thumbnail;
+    }
+
+    public ArrayList getService() {
+        return service;
+    }
+
+    public void setService(ArrayList service) {
+        this.service = service;
     }
 }

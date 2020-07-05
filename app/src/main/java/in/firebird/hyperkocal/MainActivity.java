@@ -20,6 +20,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 import static in.firebird.hyperkocal.Splash.list;
 
@@ -28,25 +29,6 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     private StatesAdapter adapter;
     private List<StatesHandler> statesHandlerList;
-
-    private View.OnClickListener onItemClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            //TODO: Step 4 of 4: Finally call getTag() on the view.
-            // This viewHolder will have all required values.
-            RecyclerView.ViewHolder viewHolder = (RecyclerView.ViewHolder) view.getTag();
-            int position = viewHolder.getAdapterPosition();
-            // viewHolder.getItemId();
-            // viewHolder.getItemViewType();
-            // viewHolder.itemView;
-
-            Toast.makeText(MainActivity.this, "You Clicked: " +viewHolder.getLayoutPosition() , Toast.LENGTH_SHORT).show();
-
-            Intent myIntent = new Intent(getApplicationContext(), CitiesView.class);
-            myIntent.putExtra("intVariableName", viewHolder.getLayoutPosition());
-            startActivity(myIntent);
-        }
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,12 +40,10 @@ public class MainActivity extends AppCompatActivity {
         statesHandlerList = new ArrayList<>();
         adapter = new StatesAdapter(this, statesHandlerList);
 
-        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 1);
-        recyclerView.setLayoutManager(mLayoutManager);
-        //recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        //RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 1);
+        //recyclerView.setLayoutManager(mLayoutManager);
+        //recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
-        adapter.setItemClickListener(onItemClickListener);
         prepareStates();
     }
 
@@ -71,12 +51,22 @@ public class MainActivity extends AppCompatActivity {
 
         StatesHandler a;
 
-        int numberOfStates = list.size();
-        for (int i = 0; i<numberOfStates; i++)
+        int numberOfStates = list.keySet().size();
+        Set<String> keySet = list.keySet();
+
+        for(String key : keySet)
         {
-            HashMap stateDetails = (HashMap) list.get(i);
+            Log.d("Neel", "prepareStates: "+key);
+            HashMap stateDetails = (HashMap) list.get(key);
             a = new StatesHandler((String) stateDetails.get("name"), (String) stateDetails.get("thumbnail"));
             statesHandlerList.add(a);
+        }
+
+        for (int i = 0; i<numberOfStates; i++)
+        {
+          //  HashMap stateDetails = (HashMap) list.get();
+          //  a = new StatesHandler((String) stateDetails.get("name"), (String) stateDetails.get("thumbnail"));
+          //  statesHandlerList.add(a);
         }
 
         adapter.notifyDataSetChanged();
