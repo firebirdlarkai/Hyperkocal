@@ -108,6 +108,7 @@ public class AddService extends AppCompatActivity {
                 listOfKeysCities = new ArrayList<String>(keySetCities);
                 Log.d("TAG", "onDataChange: "+listOfKeysCities);
                 int sizeOfCities = listOfKeysCities.size();
+                arrayListCity.clear();
                 for (int i =0; i < sizeOfCities; i++ )
                 {
                     String cityKey = listOfKeysCities.get(i);
@@ -151,11 +152,17 @@ public class AddService extends AppCompatActivity {
                     return;
                 }
 
+
                 Set<String> keySetCities = cities.keySet();
                 //Creating an ArrayList of keys by passing the keySet
                 listOfKeysCities = new ArrayList<String>(keySetCities);
                 Log.d("TAG", "onDataChange: "+listOfKeysCities);
                 int sizeOfCities = listOfKeysCities.size();
+                if (sizeOfCities==0)
+                {
+                    addServiceButton.setEnabled(false);
+                }
+                arrayListCity.clear();
                 for (int x =0; x < sizeOfCities; x++ )
                 {
                     String cityKey = listOfKeysCities.get(x);
@@ -163,6 +170,8 @@ public class AddService extends AppCompatActivity {
                     String cityName = (String) city.get("name");
                     arrayListCity.add(cityName);
                 }
+                citySelected = arrayListCity.get(0);
+                arrayAdapterCity.notifyDataSetChanged();
             }
 
             @Override
