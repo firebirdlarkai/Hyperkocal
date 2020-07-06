@@ -49,13 +49,41 @@ public class CitiesView extends AppCompatActivity {
         City a;
 
         Intent mIntent = getIntent();
-        int intValue = mIntent.getIntExtra("intVariableName", 0);
+        String key = mIntent.getStringExtra("intVariableName");
 
-        HashMap cityMap = (HashMap) list.get(intValue);
+        HashMap cityMap = (HashMap) list.get(key);
+        Log.d("TAG", "prepareCities: "+cityMap);
+        HashMap hashMap = (HashMap) cityMap.get("cities");
+        Log.d("TAG", "prepareCities: "+hashMap);
 
-        ArrayList cityArray = (ArrayList) cityMap.get("cities");
+        if (hashMap==null)
+        {
+            return;
+        }
 
-        int numberOfCities = cityArray.size();
+        //Getting Set of keys from HashMap
+        Set<String> keySet = hashMap.keySet();
+        //Creating an ArrayList of keys by passing the keySet
+        ArrayList<String> listOfKeys = new ArrayList<String>(keySet);
+        Log.d("TAG", "onDataChange: "+listOfKeys);
+        Log.d("TAG", "onDataChange: "+listOfKeys.getClass());
+        //Log.d("TAG", "onDataChange: "+listOfKeys.size());
+        int numberOfCities = listOfKeys.size();
+
+        for (int i = 0; i < numberOfCities; i++)
+        {
+            String keyCity = listOfKeys.get(i);
+            if (hashMap.get(keyCity)!=null)
+            {
+                HashMap city = (HashMap) hashMap.get(keyCity);
+                a = new City((String) city.get("name"), (String) city.get("thumbnail")
+                        , (HashMap) city.get("services"));
+                cityList.add(a);
+            }
+            Log.d("TAG", "onDataChange: "+i);
+        }
+
+        /***
         for (int i = 0; i<numberOfCities; i++)
         {
             HashMap cityDetails = (HashMap) cityArray.get(i);
@@ -63,6 +91,7 @@ public class CitiesView extends AppCompatActivity {
                     , (ArrayList) cityDetails.get("services"));
             cityList.add(a);
         }
+         ***/
         adapter.notifyDataSetChanged();
     }
 }

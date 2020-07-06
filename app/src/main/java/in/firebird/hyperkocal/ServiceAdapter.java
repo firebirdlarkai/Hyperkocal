@@ -70,17 +70,17 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.MyViewHo
         final String webLink = dataModel.get(position).getWebLink();
 
         Log.d("TAG", "onBindViewHolder: "+appstoreLink);
-        if (webLink==null)
+        if (webLink.equals(""))
         {
             holder.web.setVisibility(View.GONE);
         }
 
-        if (appstoreLink==null)
+        if (appstoreLink.equals(""))
         {
             holder.appstore.setVisibility(View.GONE);
         }
 
-        if (playstoreLink==null)
+        if (playstoreLink.equals(""))
         {
             holder.playstore.setVisibility(View.GONE);
         }

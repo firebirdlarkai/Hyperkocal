@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         {
             Log.d("Neel", "prepareStates: "+key);
             HashMap stateDetails = (HashMap) list.get(key);
-            a = new StatesHandler((String) stateDetails.get("name"), (String) stateDetails.get("thumbnail"));
+            a = new StatesHandler(key,(String) stateDetails.get("name"),(String) stateDetails.get("thumbnail"));
             statesHandlerList.add(a);
         }
 

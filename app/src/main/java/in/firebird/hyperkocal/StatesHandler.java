@@ -1,13 +1,15 @@
 package in.firebird.hyperkocal;
 
 public class StatesHandler {
+    private String id;
     private String name;
     private String thumbnail;
 
     public StatesHandler() {
     }
 
-    public StatesHandler(String name, String thumbnail) {
+    public StatesHandler(String id, String name, String thumbnail) {
+        this.id = id;
         this.name = name;
         this.thumbnail = thumbnail;
     }
@@ -26,5 +28,13 @@ public class StatesHandler {
 
     public void setThumbnail(String thumbnail) {
         this.thumbnail = thumbnail;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

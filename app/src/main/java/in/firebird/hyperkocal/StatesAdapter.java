@@ -63,7 +63,7 @@ public class StatesAdapter extends RecyclerView.Adapter<StatesAdapter.MyViewHold
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(mContext, CitiesView.class);
-                intent.putExtra("intVariableName", position);
+                intent.putExtra("intVariableName", statesHandlerList.get(position).getId());
                 mContext.startActivity(intent);
             }
         });

@@ -8,6 +8,7 @@ import android.os.Bundle;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Set;
 
 public class ServiceView extends AppCompatActivity {
 
@@ -28,7 +29,18 @@ public class ServiceView extends AppCompatActivity {
 
     public void populateData()
     {
-        ArrayList services = Constants.serviceArray;
+        HashMap services = Constants.serviceHashMap;
+
+        if (services==null)
+        {
+            return;
+        }
+
+        Set keySet = services.keySet();
+
+        ArrayList<String> listOfKeys = new ArrayList<String>(keySet);
+
+
 
         try {
             services.size();
@@ -38,9 +50,12 @@ public class ServiceView extends AppCompatActivity {
             return;
         }
 
-        for (int i = 0; i < services.size(); i++)
+        int keyCount = listOfKeys.size();
+
+        for (int i = 0; i < keyCount; i++)
         {
-            HashMap service = (HashMap) services.get(i);
+            String key = listOfKeys.get(i);
+            HashMap service = (HashMap) services.get(key);
             String appstore = "";
             String playstore = "";
             String web = "";
@@ -69,7 +84,7 @@ public class ServiceView extends AppCompatActivity {
 
             serviceArrayList.add(new Service((String)
                     service.get("name"),
-                    (String) service.get("desc"),
+                    (String) service.get("description"),
                     playstore,
                     appstore,
                     web,

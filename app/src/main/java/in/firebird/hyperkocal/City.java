@@ -1,14 +1,15 @@
 package in.firebird.hyperkocal;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class City {
 
     private String name;
     private String thumbnail;
-    private ArrayList service;
+    private HashMap service;
 
-    public City(String name, String thumbnail, ArrayList service) {
+    public City(String name, String thumbnail, HashMap service) {
         this.name = name;
         this.thumbnail = thumbnail;
         this.service = service;
@@ -30,11 +31,11 @@ public class City {
         this.thumbnail = thumbnail;
     }
 
-    public ArrayList getService() {
+    public HashMap getService() {
         return service;
     }
 
-    public void setService(ArrayList service) {
+    public void setService(HashMap service) {
         this.service = service;
     }
 }

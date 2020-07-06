@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class CitiesAdapter extends RecyclerView.Adapter<CitiesAdapter.MyViewHolder> {
@@ -60,7 +61,7 @@ public class CitiesAdapter extends RecyclerView.Adapter<CitiesAdapter.MyViewHold
         holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Constants.serviceArray = (ArrayList) cityList.get(position).getService();
+                Constants.serviceHashMap = (HashMap) cityList.get(position).getService();
                 Intent intent = new Intent(mContext, ServiceView.class);
                 mContext.startActivity(intent);
             }
