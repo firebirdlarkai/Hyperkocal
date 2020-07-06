@@ -148,7 +148,12 @@ public class AddService extends AppCompatActivity {
                     arrayListCity.clear();
                     arrayAdapterCity.notifyDataSetChanged();
                     citySelected = "";
+                    addServiceButton.setEnabled(false);
                     return;
+                }
+                else
+                {
+                    addServiceButton.setEnabled(true);
                 }
 
 
@@ -178,6 +183,7 @@ public class AddService extends AppCompatActivity {
 
             }
         });
+
 
         searchableSpinnerCity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
