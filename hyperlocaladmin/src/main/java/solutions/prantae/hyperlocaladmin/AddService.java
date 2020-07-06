@@ -137,7 +137,6 @@ public class AddService extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
                 stateSelected = listOfKeys.get(i);
-                Toast.makeText(getApplicationContext(), stateSelected, Toast.LENGTH_SHORT ).show();
 
                 HashMap state = (HashMap) statesValue.get(listOfKeys.get(i));
 
@@ -184,7 +183,6 @@ public class AddService extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 citySelected = listOfKeysCities.get(i);
-                Toast.makeText(getApplicationContext(), citySelected, Toast.LENGTH_SHORT ).show();
             }
 
             @Override
@@ -215,6 +213,13 @@ public class AddService extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(),
                                 "City Service to "+searchableSpinnerCity.getSelectedItem(),
                                 Toast.LENGTH_SHORT).show();
+                        serviceName.setText("");
+                        serviceLogo.setText("");
+                        serviceDescription.setText("");
+                        servicePlaystore.setText("");
+                        serviceAppstore.setText("");
+                        serviceWeb.setText("");
+                        serviceType.setText("");
                     }
                 });
             }
