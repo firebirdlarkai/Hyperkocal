@@ -111,6 +111,8 @@ public class AddCity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(),
                                 "City Added to "+searchableSpinner.getSelectedItem(),
                                 Toast.LENGTH_SHORT).show();
+                        cityName.setText("");
+                        cityThumbnail.setText("");
                     }
                 });
             }
