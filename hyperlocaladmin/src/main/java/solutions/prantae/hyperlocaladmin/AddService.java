@@ -34,7 +34,7 @@ public class AddService extends AppCompatActivity {
     SearchableSpinner searchableSpinnerState;
     SearchableSpinner searchableSpinnerCity;
     EditText serviceName, serviceDescription, serviceLogo, servicePlaystore, serviceAppstore,
-            serviceWeb;
+            serviceWeb, serviceType;
     Button addServiceButton;
     HashMap statesValue;
 
@@ -63,6 +63,7 @@ public class AddService extends AppCompatActivity {
         serviceAppstore = findViewById(R.id.appstoreURL);
         servicePlaystore = findViewById(R.id.playstoreURL);
         serviceWeb = findViewById(R.id.webURL);
+        serviceType = findViewById(R.id.serviceType);
 
         addServiceButton.setEnabled(false);
 
@@ -197,6 +198,7 @@ public class AddService extends AppCompatActivity {
                 childMap.put("playstore", servicePlaystore.getText().toString());
                 childMap.put("appstore", serviceAppstore.getText().toString());
                 childMap.put("web", serviceWeb.getText().toString());
+                childMap.put("type", serviceType.getText().toString());
 
                 myCityRef.push().setValue(childMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override

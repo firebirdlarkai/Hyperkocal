@@ -54,6 +54,12 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:hint="Service type"
+        android:id="@+id/serviceType"
+        />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:hint="Website URL (Can be empty)"
         android:id="@+id/webURL"
         />
@@ -63,5 +69,4 @@
         android:text="Add service"
         android:id="@+id/addService"
         />
-
 </LinearLayout>
