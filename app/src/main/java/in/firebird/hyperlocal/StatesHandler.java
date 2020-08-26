@@ -1,18 +1,17 @@
-package in.firebird.hyperkocal;
+package in.firebird.hyperlocal;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
-public class City {
-
+public class StatesHandler {
+    private String id;
     private String name;
     private String thumbnail;
-    private HashMap service;
 
-    public City(String name, String thumbnail, HashMap service) {
+    public StatesHandler() {
+    }
+
+    public StatesHandler(String id, String name, String thumbnail) {
+        this.id = id;
         this.name = name;
         this.thumbnail = thumbnail;
-        this.service = service;
     }
 
     public String getName() {
@@ -31,11 +30,11 @@ public class City {
         this.thumbnail = thumbnail;
     }
 
-    public HashMap getService() {
-        return service;
+    public String getId() {
+        return id;
     }
 
-    public void setService(HashMap service) {
-        this.service = service;
+    public void setId(String id) {
+        this.id = id;
     }
 }

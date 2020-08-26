@@ -1,24 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="in.firebird.hyperkocal">
+    package="in.firebird.hyperlocal">
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/lowres"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/lowres"
         android:supportsRtl="true"
+        android:usesCleartextTraffic="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ServiceView"></activity>
-        <activity android:name=".CitiesView" />
-        <activity android:name=".Splash">
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-9578090724001809~9229237816"/>
+        <activity android:name="in.firebird.hyperlocal.ServiceView"></activity>
+        <activity android:name="in.firebird.hyperlocal.CitiesView" />
+        <activity android:name="in.firebird.hyperlocal.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
+        <activity android:name="in.firebird.hyperlocal.MainActivity" />
     </application>
 
 </manifest>

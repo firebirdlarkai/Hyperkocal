@@ -1,19 +1,23 @@
-package in.firebird.hyperkocal;
+package in.firebird.hyperlocal;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.util.ArrayList;
 
@@ -36,6 +40,8 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.MyViewHo
         private ImageView playstore;
         private ImageView appstore;
         private ImageView web;
+        private RelativeLayout card;
+        private TextView source;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -46,6 +52,8 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.MyViewHo
             playstore = itemView.findViewById(R.id.buttonPlaystore);
             appstore = itemView.findViewById(R.id.buttonAppstore);
             web = itemView.findViewById(R.id.weblink);
+            card = itemView.findViewById(R.id.serviceCard);
+            source = itemView.findViewById(R.id.serviceSource);
         }
     }
 
@@ -58,12 +66,17 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.MyViewHo
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
         Log.d("TAG", "onBindViewHolder: ONBIND");
         holder.title.setText(dataModel.get(position).getName());
         holder.description.setText(dataModel.get(position).getDescription());
         holder.serviceType.setText(dataModel.get(position).getType());
-        Glide.with(context).load(dataModel.get(position).getLogo()).into(holder.logoView);
+        Glide.with(context)
+                .load(dataModel.get(position)
+                .getLogo())
+                .into(holder.logoView);
+
+
 
         final String playstoreLink = dataModel.get(position).getPlaystoreLink();
         final String appstoreLink = dataModel.get(position).getAppstoreLink();
@@ -87,6 +100,7 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.MyViewHo
         holder.appstore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                logAnalytics(dataModel.get(position));
                 Intent i = new Intent(Intent.ACTION_VIEW);
                 i.setData(Uri.parse(appstoreLink));
                 context.startActivity(i);
@@ -96,6 +110,7 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.MyViewHo
         holder.playstore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                logAnalytics(dataModel.get(position));
                 Intent i = new Intent(Intent.ACTION_VIEW);
                 i.setData(Uri.parse(playstoreLink));
                 i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -106,14 +121,57 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.MyViewHo
         holder.web.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                logAnalytics(dataModel.get(position));
                 Intent i = new Intent(Intent.ACTION_VIEW);
                 i.setData(Uri.parse(webLink));
                 i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(i);
             }
         });
+        if (dataModel.get(position).getAutoFetch().equals("true"))
+        {
+            holder.source.setText("Playstore Suggestions");
+            //holder.logoView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        }
+        else if (dataModel.get(position).getAutoFetch().equals("false"))
+        {
+            holder.source.setText("Curated");
+            holder.source.setTextColor(Color.parseColor("#c70039"));
+            //holder.logoView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+        }
+
+        holder.card.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!playstoreLink.equals(""))
+                {
+                    Intent i = new Intent(Intent.ACTION_VIEW);
+                    i.setData(Uri.parse(playstoreLink));
+                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.startActivity(i);
+                }
+                else if (!webLink.equals(""))
+                {
+                    logAnalytics(dataModel.get(position));
+                    Intent i = new Intent(Intent.ACTION_VIEW);
+                    i.setData(Uri.parse(webLink));
+                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.startActivity(i);
+                }
+            }
+        });
     }
 
+    private FirebaseAnalytics mFirebaseAnalytics;
+    public void logAnalytics(Service service)
+    {
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(context);
+        Bundle bundle = new Bundle();
+        bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, service.getName());
+        bundle.putString(FirebaseAnalytics.Param.LOCATION, Constants.citySelected);
+        //Constants.serviceHashMap = (HashMap) cityList.get(position).getService();
+        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
+    }
     @Override
     public int getItemCount() {
         return dataModel.size();

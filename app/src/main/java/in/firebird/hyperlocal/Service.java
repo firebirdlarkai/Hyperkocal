@@ -1,6 +1,4 @@
-package in.firebird.hyperkocal;
-
-import android.widget.TextView;
+package in.firebird.hyperlocal;
 
 public class Service {
     private String name;
@@ -10,8 +8,10 @@ public class Service {
     private String webLink;
     private String type;
     private String logo;
+    private String autoFetch;
 
-    public Service(String name, String description, String playstoreLink, String appstoreLink, String webLink, String type, String logo) {
+
+    public Service(String name, String description, String playstoreLink, String appstoreLink, String webLink, String type, String logo, String autoFetch) {
         this.name = name;
         this.description = description;
         this.playstoreLink = playstoreLink;
@@ -19,6 +19,7 @@ public class Service {
         this.webLink = webLink;
         this.type = type;
         this.logo = logo;
+        this.autoFetch = autoFetch;
     }
 
     public String getName() {
@@ -75,5 +76,13 @@ public class Service {
 
     public void setWebLink(String webLink) {
         this.webLink = webLink;
+    }
+
+    public String getAutoFetch() {
+        return autoFetch;
+    }
+
+    public void setAutoFetch(String autoFetch) {
+        this.autoFetch = autoFetch;
     }
 }

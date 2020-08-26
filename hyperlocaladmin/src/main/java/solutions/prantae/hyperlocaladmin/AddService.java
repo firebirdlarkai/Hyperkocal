@@ -174,7 +174,7 @@ public class AddService extends AppCompatActivity {
                     String cityName = (String) city.get("name");
                     arrayListCity.add(cityName);
                 }
-                citySelected = arrayListCity.get(0);
+                citySelected = listOfKeysCities.get(0);
                 arrayAdapterCity.notifyDataSetChanged();
             }
 

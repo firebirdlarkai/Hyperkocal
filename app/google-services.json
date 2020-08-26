@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:617455308097:android:50a4af10fa4cf608e8e5c0",
         "android_client_info": {
-          "package_name": "in.firebird.hyperkocal"
+          "package_name": "in.firebird.hyperlocal"
         }
       },
       "oauth_client": [
@@ -18,7 +18,7 @@
           "client_id": "617455308097-e57vad3m47motr37m40jnpuldgg65ksp.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "in.firebird.hyperkocal",
+            "package_name": "in.firebird.hyperlocal",
             "certificate_hash": "1b96976ece021f47125a721ed857d920cb4fc351"
           }
         },

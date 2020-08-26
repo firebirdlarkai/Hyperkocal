@@ -1,10 +1,11 @@
-package in.firebird.hyperkocal;
+package in.firebird.hyperlocal;
 
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -14,55 +15,53 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
-public class CitiesAdapter extends RecyclerView.Adapter<CitiesAdapter.MyViewHolder> {
-
+public class StatesAdapter extends RecyclerView.Adapter<StatesAdapter.MyViewHolder> {
 
     private Context mContext;
-    private List<City> cityList;
-
+    private List<StatesHandler> statesHandlerList;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView name;
         public ImageView thumbnail;
         public RelativeLayout relativeLayout;
+        private Button press;
 
         public MyViewHolder(View view) {
             super(view);
-            name = (TextView) view.findViewById(R.id.cityName);
-            thumbnail = (ImageView) view.findViewById(R.id.cityImageView);
-            relativeLayout = view.findViewById(R.id.cityRelativeView);
+            name = (TextView) view.findViewById(R.id.stateName);
+            thumbnail = (ImageView) view.findViewById(R.id.stateImageView);
+            relativeLayout = (RelativeLayout) view.findViewById(R.id.state_RelativeView);
+            view.setTag(this);
         }
     }
-    public CitiesAdapter(Context mContext, List<City> cityList) {
+    public StatesAdapter(Context mContext, List<StatesHandler> statelist) {
         this.mContext = mContext;
-        this.cityList = cityList;
+        this.statesHandlerList = statelist;
     }
-
 
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.citycardview, parent, false);
-
-        return new CitiesAdapter.MyViewHolder(itemView);
+        final View itemView = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.statecardview, parent, false);
+        return new MyViewHolder(itemView);
     }
+
+
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
-        City city = cityList.get(position);
-        holder.name.setText(city.getName());
+        StatesHandler album = statesHandlerList.get(position);
+        holder.name.setText(album.getName());
         // loading album cover using Glide library
-        Glide.with(mContext).load(city.getThumbnail()).into(holder.thumbnail);
+        Glide.with(mContext).load(album.getThumbnail()).into(holder.thumbnail);
         holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Constants.serviceHashMap = (HashMap) cityList.get(position).getService();
-                Intent intent = new Intent(mContext, ServiceView.class);
+                Intent intent = new Intent(mContext, CitiesView.class);
+                intent.putExtra("intVariableName", statesHandlerList.get(position).getId());
                 mContext.startActivity(intent);
             }
         });
@@ -70,6 +69,8 @@ public class CitiesAdapter extends RecyclerView.Adapter<CitiesAdapter.MyViewHold
 
     @Override
     public int getItemCount() {
-        return cityList.size();
+        return statesHandlerList.size();
     }
+
+
 }

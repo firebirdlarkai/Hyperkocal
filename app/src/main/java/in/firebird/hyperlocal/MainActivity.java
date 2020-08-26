@@ -1,34 +1,29 @@
-package in.firebird.hyperkocal;
+package in.firebird.hyperlocal;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.Toast;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
-import static in.firebird.hyperkocal.Splash.list;
+import static in.firebird.hyperlocal.Splash.list;
 
 public class MainActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
     private StatesAdapter adapter;
     private List<StatesHandler> statesHandlerList;
+    private AdView mAdView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,10 +34,17 @@ public class MainActivity extends AppCompatActivity {
 
         statesHandlerList = new ArrayList<>();
         adapter = new StatesAdapter(this, statesHandlerList);
+        mAdView = findViewById(R.id.adView);
 
-        //RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 1);
-        //recyclerView.setLayoutManager(mLayoutManager);
-        //recyclerView.setItemAnimator(new DefaultItemAnimator());
+        AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice("EB203454216E802E235DDC7A728D19AF")
+                .build();
+
+        mAdView.loadAd(adRequest);
+
+        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 3);
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
         prepareStates();
     }

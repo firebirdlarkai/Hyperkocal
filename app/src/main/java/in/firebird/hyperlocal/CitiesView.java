@@ -1,4 +1,4 @@
-package in.firebird.hyperkocal;
+package in.firebird.hyperlocal;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -8,26 +8,58 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
+
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
-import static in.firebird.hyperkocal.Splash.list;
+import static in.firebird.hyperlocal.Splash.list;
 
 public class CitiesView extends AppCompatActivity {
 
     RecyclerView recyclerView;
     private CitiesAdapter adapter;
     private List<City> cityList;
-
+    private InterstitialAd mInterstitialAd;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cities_view);
+
+        //RequestConfiguration.Builder().setTestDeviceIds(Arrays.asList("EB203454216E802E235DDC7A728D19AF");
+                mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId("ca-app-pub-5706938673064084/8347400988");
+
+        // Create an ad request.
+        AdRequest.Builder adRequestBuilder = new AdRequest.Builder();
+
+        AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice("EB203454216E802E235DDC7A728D19AF")
+                .build();
+        // Set an AdListener.
+        mInterstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdLoaded() {
+                Toast.makeText(CitiesView.this,
+                        "The interstitial is loaded", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onAdClosed() {
+                // Proceed to the next level.
+                //goToNextLevel();
+            }
+        });
+
+        // Start loading the ad now so that it is ready by the time the user is ready to go to
+        // the next level.
+        mInterstitialAd.loadAd(adRequestBuilder.build());
 
         Log.d("Neel", "onCreate: Inside City view");
         recyclerView = (RecyclerView) findViewById(R.id.myRecyclerViewCities);

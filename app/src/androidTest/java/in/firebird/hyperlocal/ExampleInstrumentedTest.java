@@ -1,4 +1,4 @@
-package in.firebird.hyperkocal;
+package in.firebird.hyperlocal;
 
 import android.content.Context;
 
