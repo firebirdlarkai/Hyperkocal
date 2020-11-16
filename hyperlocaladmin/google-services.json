@@ -1,42 +1,71 @@
 {
   "project_info": {
-    "project_number": "617455308097",
-    "firebase_url": "https://hyperkocal.firebaseio.com",
-    "project_id": "hyperkocal",
-    "storage_bucket": "hyperkocal.appspot.com"
+    "project_number": "649363795211",
+    "firebase_url": "https://hyperlocalfinder.firebaseio.com",
+    "project_id": "hyperlocalfinder",
+    "storage_bucket": "hyperlocalfinder.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:617455308097:android:50a4af10fa4cf608e8e5c0",
+        "mobilesdk_app_id": "1:649363795211:android:79544006b7d763daa1460e",
         "android_client_info": {
-          "package_name": "solutions.prantae.hyperlocaladmin"
+          "package_name": "com.numerals.hyperlocal"
         }
       },
       "oauth_client": [
         {
-          "client_id": "617455308097-e57vad3m47motr37m40jnpuldgg65ksp.apps.googleusercontent.com",
+          "client_id": "649363795211-k74d62d563m1ehuarm2sdmftt9491bcj.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "solutions.prantae.hyperlocaladmin",
+            "package_name": "com.numerals.hyperlocal",
             "certificate_hash": "1b96976ece021f47125a721ed857d920cb4fc351"
           }
         },
         {
-          "client_id": "617455308097-mqrqo9la0bv2gul4m74rei2e0hanea3t.apps.googleusercontent.com",
+          "client_id": "649363795211-2r5mt3p9j1pevk5uol4oti8ogv4g0lg1.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCEdHj7n-zXSR90gyysTWinC85nWkUPDB8"
+          "current_key": "AIzaSyA9qge7L-2mKP_IqFKNQwh8UGAcKLi0l-0"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "617455308097-mqrqo9la0bv2gul4m74rei2e0hanea3t.apps.googleusercontent.com",
+              "client_id": "649363795211-2r5mt3p9j1pevk5uol4oti8ogv4g0lg1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:649363795211:android:c0a22924e50aef47a1460e",
+        "android_client_info": {
+          "package_name": "com.numerals.hyperlocaladmin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "649363795211-2r5mt3p9j1pevk5uol4oti8ogv4g0lg1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA9qge7L-2mKP_IqFKNQwh8UGAcKLi0l-0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "649363795211-2r5mt3p9j1pevk5uol4oti8ogv4g0lg1.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

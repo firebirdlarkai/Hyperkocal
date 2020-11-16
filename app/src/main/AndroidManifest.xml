@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="in.firebird.hyperlocal">
+    package="com.numerals.hyperlocal">
 
     <application
         android:allowBackup="true"
@@ -13,16 +13,16 @@
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-9578090724001809~9229237816"/>
-        <activity android:name="in.firebird.hyperlocal.ServiceView"></activity>
-        <activity android:name="in.firebird.hyperlocal.CitiesView" />
-        <activity android:name="in.firebird.hyperlocal.Splash">
+        <activity android:name="com.numerals.hyperlocal.ServiceView"></activity>
+        <activity android:name="com.numerals.hyperlocal.CitiesView" />
+        <activity android:name="com.numerals.hyperlocal.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="in.firebird.hyperlocal.MainActivity" />
+        <activity android:name="com.numerals.hyperlocal.MainActivity" />
     </application>
 
 </manifest>
