@@ -49,8 +49,6 @@ public class StatesAdapter extends RecyclerView.Adapter<StatesAdapter.MyViewHold
         return new MyViewHolder(itemView);
     }
 
-
-
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
         StatesHandler album = statesHandlerList.get(position);
@@ -71,6 +69,4 @@ public class StatesAdapter extends RecyclerView.Adapter<StatesAdapter.MyViewHold
     public int getItemCount() {
         return statesHandlerList.size();
     }
-
-
 }

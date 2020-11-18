@@ -21,11 +21,9 @@ import java.util.List;
 
 public class CitiesAdapter extends RecyclerView.Adapter<CitiesAdapter.MyViewHolder> {
 
-
     private Context mContext;
     private List<City> cityList;
     private FirebaseAnalytics mFirebaseAnalytics;
-
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView name;
@@ -43,7 +41,6 @@ public class CitiesAdapter extends RecyclerView.Adapter<CitiesAdapter.MyViewHold
         this.mContext = mContext;
         this.cityList = cityList;
     }
-
 
     @NonNull
     @Override
